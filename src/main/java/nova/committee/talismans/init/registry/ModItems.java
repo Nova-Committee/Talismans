@@ -6,8 +6,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
 import nova.committee.talismans.Static;
-import nova.committee.talismans.common.item.OxEmblems;
-import nova.committee.talismans.common.item.RatEmblems;
+import nova.committee.talismans.common.item.*;
 
 /**
  * Description:
@@ -19,6 +18,12 @@ import nova.committee.talismans.common.item.RatEmblems;
 public class ModItems {
     public static Item rat_em;
     public static Item ox_em;
+    public static Item rabbit_em;
+    public static Item dragon_em;
+    public static Item snake_em;
+    public static Item horse_em;
+    public static Item chicken_em;
+    public static Item dog_em;
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
@@ -26,7 +31,13 @@ public class ModItems {
 
         registry.registerAll(
                 rat_em = new RatEmblems(),
-                ox_em = new OxEmblems()
+                ox_em = new OxEmblems(),
+                rabbit_em = new RabbitEmblems(),
+                dragon_em = new DragonEmblems(),
+                snake_em = new SnakeEmblems(),
+                horse_em = new HorseEmblems(),
+                chicken_em = new HorseEmblems(),
+                dog_em= new DogEmblems()
         );
     }
 }

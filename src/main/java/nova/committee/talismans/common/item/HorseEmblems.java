@@ -11,13 +11,12 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Description:
  * Author: cnlimiter
- * Date: 2022/7/19 15:20
+ * Date: 2022/7/22 18:06
  * Version: 1.0
  */
-public class RatEmblems extends BaseEmblems{
-
-    public RatEmblems(){
-        setRegistryName("rat_em");
+public class HorseEmblems extends BaseEmblems{
+    public HorseEmblems(){
+        setRegistryName("horse_em");
     }
 
     @Override
@@ -27,18 +26,21 @@ public class RatEmblems extends BaseEmblems{
                 pStack.getOrCreateTag().putBoolean("cap_on", false);
             }
             var player = ((ServerPlayer) pEntity);
-            var nv1 = player.getEffect(MobEffects.HEALTH_BOOST);
+            var nv1 = player.getEffect(MobEffects.HEAL);
 
             if (nv1 == null) {
-                nv1 = new MobEffectInstance(MobEffects.HEALTH_BOOST, 2400, 5, false, false, false);
+                nv1 = new MobEffectInstance(MobEffects.HEAL, 2400, 3, false, false, false);
             }
-
-
             if (pStack.getTag().contains("cap_on")) {
                 if (pStack.getTag().getBoolean("cap_on")){
 
                     player.addEffect(nv1);
                     nv1.duration = 2400;
+
+                    player.getActiveEffects().forEach(mobEffectInstance -> {
+                        if (!mobEffectInstance.getEffect().isBeneficial())
+                            player.removeEffect(mobEffectInstance.getEffect());
+                    });
 
                 }
                 else {
@@ -48,5 +50,4 @@ public class RatEmblems extends BaseEmblems{
             }
         }
     }
-
 }

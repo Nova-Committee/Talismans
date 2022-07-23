@@ -23,7 +23,7 @@ public class DogEmblems extends BaseEmblems{
     public void inventoryTick(@NotNull ItemStack pStack, Level pLevel, @NotNull Entity pEntity, int pSlotId, boolean pIsSelected) {
         if (!pLevel.isClientSide){
             if (!pStack.hasTag()) {
-                pStack.getOrCreateTag().putBoolean("cap_on", false);
+                pStack.getOrCreateTag().putBoolean("extra_cap", false);
             }
             var player = ((ServerPlayer) pEntity);
             var nv1 = player.getEffect(MobEffects.SLOW_FALLING);
@@ -31,8 +31,8 @@ public class DogEmblems extends BaseEmblems{
             if (nv1 == null) {
                 nv1 = new MobEffectInstance(MobEffects.SLOW_FALLING, 2400, 0, false, false, false);
             }
-            if (pStack.getTag().contains("cap_on")) {
-                if (pStack.getTag().getBoolean("cap_on")){
+            if (pStack.getTag().contains("extra_cap")) {
+                if (pStack.getTag().getBoolean("extra_cap")){
 
                     player.addEffect(nv1);
                     nv1.duration = 2400;

@@ -36,7 +36,7 @@ public class ModItems {
                 dragon_em = new DragonEmblems(),
                 snake_em = new SnakeEmblems(),
                 horse_em = new HorseEmblems(),
-                chicken_em = new HorseEmblems(),
+                chicken_em = new ChickenEmblems(),
                 dog_em= new DogEmblems()
         );
     }

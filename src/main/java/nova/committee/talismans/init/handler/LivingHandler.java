@@ -42,8 +42,7 @@ public class LivingHandler {
         }
         if (player.getInventory().contains(ModItems.dog_em.getDefaultInstance())) {
             if (player.getInventory().items.stream().allMatch(itemStack -> itemStack.getItem() instanceof DogEmblems
-                    && itemStack.getTag().contains("cap_on") && itemStack.getTag().getBoolean("cap_on"))) {
-
+                    && itemStack.getTag().contains("extra_cap") && itemStack.getTag().getBoolean("extra_cap"))) {
                 event.setCanceled(true);
             }
 

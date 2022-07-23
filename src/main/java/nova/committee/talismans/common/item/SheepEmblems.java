@@ -7,4 +7,8 @@ package nova.committee.talismans.common.item;
  * Version: 1.0
  */
 public class SheepEmblems extends BaseEmblems{
+    public SheepEmblems(){
+        setRegistryName("sheep_em");
+    }
+
 }

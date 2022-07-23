@@ -1,8 +1,8 @@
 package nova.committee.talismans.common.item;
 
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -22,27 +22,22 @@ public class DogEmblems extends BaseEmblems{
     @Override
     public void inventoryTick(@NotNull ItemStack pStack, Level pLevel, @NotNull Entity pEntity, int pSlotId, boolean pIsSelected) {
         if (!pLevel.isClientSide){
-            if (!pStack.hasTag()) {
-                pStack.getOrCreateTag().putBoolean("extra_cap", false);
-            }
-            var player = ((ServerPlayer) pEntity);
-            var nv1 = player.getEffect(MobEffects.SLOW_FALLING);
 
-            if (nv1 == null) {
-                nv1 = new MobEffectInstance(MobEffects.SLOW_FALLING, 2400, 0, false, false, false);
-            }
+            var player = ((ServerPlayer) pEntity);
+
             if (pStack.getTag().contains("extra_cap")) {
                 if (pStack.getTag().getBoolean("extra_cap")){
+                    player.getCooldowns().addCooldown(this, 2400);
 
-                    player.addEffect(nv1);
-                    nv1.duration = 2400;
-                }
-                else {
-                    nv1.duration = 0;
+                    CriteriaTriggers.USED_TOTEM.trigger(player, pStack);
+                    pLevel.broadcastEntityEvent(player, (byte)35);
 
                 }
+                player.awardStat(Stats.ITEM_USED.get(this));
+
             }
         }
+        super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
     }
 
 }

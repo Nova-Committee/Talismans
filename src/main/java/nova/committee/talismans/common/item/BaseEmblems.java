@@ -1,6 +1,5 @@
 package nova.committee.talismans.common.item;
 
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -17,6 +16,8 @@ import org.jetbrains.annotations.NotNull;
  * Version: 1.0
  */
 public abstract class BaseEmblems extends Item {
+
+    private boolean foil = false;
     public BaseEmblems() {
         super(new Properties()
                 .tab(Static.TAB)
@@ -28,26 +29,18 @@ public abstract class BaseEmblems extends Item {
         );
     }
 
+    public void setFoil(boolean foil) {
+        this.foil = foil;
+    }
+
     @Override
     public boolean isFoil(@NotNull ItemStack pStack) {
-        return true;
+        return foil;
     }
 
     @Override
     public boolean isDamageable(ItemStack stack) {
         return false;
-    }
-
-    @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(Level pLevel, @NotNull Player pPlayer, @NotNull InteractionHand pUsedHand) {
-        if (!pLevel.isClientSide && pPlayer.isCrouching()) {
-            var stack = pPlayer.getItemInHand(pUsedHand);
-            if(stack.hasTag() && stack.getTag().contains("extra_cap")){
-                stack.getOrCreateTag().putBoolean("extra_cap", !stack.getTag().getBoolean("extra_cap"));
-            }
-        }
-
-        return super.use(pLevel, pPlayer, pUsedHand);
     }
 
     @Override
@@ -57,5 +50,6 @@ public abstract class BaseEmblems extends Item {
                 pStack.getOrCreateTag().putBoolean("extra_cap", false);
             }
         }
+        super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
     }
 }

@@ -27,12 +27,24 @@ public class HorseEmblems extends BaseEmblems{
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(Level pLevel, @NotNull Player pPlayer, @NotNull InteractionHand pUsedHand) {
+        super.use(pLevel, pPlayer, pUsedHand);
         var stack = pPlayer.getItemInHand(pUsedHand);
         var nv1 = pPlayer.getEffect(MobEffects.HEAL);
         if (nv1 == null) {
             nv1 = new MobEffectInstance(MobEffects.HEAL, 600, 2, false, false, false);
         }
         if (!pLevel.isClientSide){
+            if (pPlayer.isCrouching() && stack.hasTag() && stack.getTag().contains("extra_cap")) {
+                if(stack.getTag().getBoolean("extra_cap")){
+                    stack.getOrCreateTag().putBoolean("extra_cap",false);
+                    setFoil(false);
+                }
+                else {
+                    stack.getOrCreateTag().putBoolean("extra_cap",true);
+                    setFoil(true);
+                }
+                return InteractionResultHolder.consume(stack);
+            }
             if (stack.getTag().getBoolean("extra_cap")){
                 pPlayer.getCooldowns().addCooldown(this, 2400);
                 pPlayer.getActiveEffects().forEach(mobEffectInstance -> {
@@ -45,7 +57,9 @@ public class HorseEmblems extends BaseEmblems{
                 pPlayer.addEffect(nv1);
             }
             pPlayer.awardStat(Stats.ITEM_USED.get(this));
+            return InteractionResultHolder.consume(stack);
         }
+
         return super.use(pLevel, pPlayer, pUsedHand);
     }
 

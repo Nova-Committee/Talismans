@@ -6,6 +6,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import nova.committee.talismans.Static;
@@ -35,17 +36,25 @@ public class LivingHandler {
     }
 
 
+    //dog ability
+    @SubscribeEvent
+    public static void onGetHurt(LivingHurtEvent event) {
+        if (!(event.getEntityLiving() instanceof Player player)) {
+            return;
+        }
+        if (player.getInventory().contains(ModItems.dog_em.getDefaultInstance())) {
+            event.setCanceled(true);
+        }
+    }
+
+    //dog ability
     @SubscribeEvent
     public static void onAttacked(LivingAttackEvent event) {
         if (!(event.getEntityLiving() instanceof Player player)) {
             return;
         }
         if (player.getInventory().contains(ModItems.dog_em.getDefaultInstance())) {
-            if (player.getInventory().items.stream().allMatch(itemStack -> itemStack.getItem() instanceof DogEmblems
-                    && itemStack.getTag().contains("extra_cap") && itemStack.getTag().getBoolean("extra_cap"))) {
-                event.setCanceled(true);
-            }
-
+            event.setCanceled(true);
         }
     }
 

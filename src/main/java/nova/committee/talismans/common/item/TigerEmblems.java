@@ -7,4 +7,8 @@ package nova.committee.talismans.common.item;
  * Version: 1.0
  */
 public class TigerEmblems extends BaseEmblems{
+    public TigerEmblems(){
+        setRegistryName("tiger_em");
+    }
+
 }

@@ -24,7 +24,7 @@ public class ChickenEmblems extends BaseEmblems{
 
 
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(Level pLevel, @NotNull Player pPlayer, @NotNull InteractionHand pUsedHand) {
+    public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level pLevel, @NotNull Player pPlayer, @NotNull InteractionHand pUsedHand) {
         var stack = pPlayer.getItemInHand(pUsedHand);
         var nv1 = pPlayer.getEffect(MobEffects.SLOW_FALLING);
         var nv2 = pPlayer.getEffect(MobEffects.SLOW_FALLING);
@@ -35,8 +35,18 @@ public class ChickenEmblems extends BaseEmblems{
             nv2 = new MobEffectInstance(MobEffects.JUMP, 1200, 1, false, false, false);
         }
         if (!pLevel.isClientSide){
+            if (pPlayer.isCrouching() && stack.hasTag() && stack.getTag().contains("extra_cap")) {
+                if(stack.getTag().getBoolean("extra_cap")){
+                    stack.getOrCreateTag().putBoolean("extra_cap",false);
+                    setFoil(false);
+                }
+                else {
+                    stack.getOrCreateTag().putBoolean("extra_cap",true);
+                    setFoil(true);
+                }
+                return InteractionResultHolder.consume(stack);
+            }
             if (stack.getTag().getBoolean("extra_cap")){
-
             }
             else {
                 pPlayer.getCooldowns().addCooldown(this, 1200);
@@ -44,6 +54,7 @@ public class ChickenEmblems extends BaseEmblems{
                 pPlayer.addEffect(nv2);
             }
             pPlayer.awardStat(Stats.ITEM_USED.get(this));
+            return InteractionResultHolder.consume(stack);
         }
         return super.use(pLevel, pPlayer, pUsedHand);
     }

@@ -26,15 +26,19 @@ public class DragonEmblems extends BaseEmblems{
 
     @Override
     public void inventoryTick(@NotNull ItemStack pStack, Level pLevel, @NotNull Entity pEntity, int pSlotId, boolean pIsSelected) {
-        var player = ((ServerPlayer) pEntity);
-        var nv1 = player.getEffect(MobEffects.FIRE_RESISTANCE);
-        if (nv1 == null) {
-            nv1 = new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 2400, 2, false, false, false);
-        }
-        if (!pLevel.isClientSide){
+        if (!pLevel.isClientSide) {
+            var player = ((ServerPlayer) pEntity);
+            var nv1 = player.getEffect(MobEffects.FIRE_RESISTANCE);
+            if (nv1 == null) {
+                nv1 = new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 2400, 2, false, false, false);
+            }
             player.addEffect(nv1);
             nv1.duration = 2400;
+            player.fireImmune();
+            player.clearFire();
+
         }
+        super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
     }
 
     @Override

@@ -5,7 +5,10 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "talismans.refmap.json",
   "mixins": [
-    "EntityMixin"
+    "EntityMixin",
+    "LookAtGoalMixin",
+    "MotionMultiplierMixin",
+    "PlayerMixin"
   ],
   "client": [
     "CameraMixin",
@@ -13,7 +16,8 @@
     "GameRendererMixin",
     "GuiMixin",
     "LevelRendererMixin",
-    "MouseHandlerMixin"
+    "MouseHandlerMixin",
+    "PlayerRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  */
 
 @Mixin(CameraType.class)
-public class CameraTypeMixin {
+public abstract class CameraTypeMixin {
     @Inject(at = @At("HEAD"), method = "isFirstPerson()Z", cancellable = true)
     private void onIsFirstPerson(CallbackInfoReturnable<Boolean> info) {
         if (!FreeCamera.instance.isActive()) {

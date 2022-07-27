@@ -23,6 +23,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import nova.committee.talismans.common.morph.cap.MorphCapabilityAttacher;
 import nova.committee.talismans.common.morph.cap.RenderDataCapabilityProvider;
+import nova.committee.talismans.init.handler.RenderHandler;
 import nova.committee.talismans.util.ProtectedFieldAccess;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -30,10 +31,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = PlayerRenderer.class)
+@Mixin(PlayerRenderer.class)
 public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>>
 {
-	// Fuck java. I cannot use generics without using weird looking casting shit.
 	@SuppressWarnings("rawtypes")
 	private static ProtectedFieldAccess<ModelPart, QuadrupedModel> LEFT_FRONT_LEG_ACCESSOR = new ProtectedFieldAccess<>(QuadrupedModel.class, "f_170855_");
 	@SuppressWarnings("rawtypes")
@@ -80,7 +80,6 @@ public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractC
 	{
 		if(checkMorphPresent(playerIn))
 		{
-//			RenderHandler.checkCache(playerIn);
 			info.cancel();
 
 			Entity cachedEntity = playerIn.getCapability(RenderDataCapabilityProvider.RENDER_CAP).resolve().get().getOrCreateCachedEntity(playerIn);
@@ -109,7 +108,7 @@ public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractC
 	{
 	}
 
-	private void renderArm(boolean isLeft, AbstractClientPlayer player, ModelPart arm, PoseStack matrixStack, int combinedLightIn, MultiBufferSource buffer, LivingEntityRenderer<? super LivingEntity, ?> renderer, LivingEntity entity, int light)
+	private void renderArm(boolean isLeft, AbstractClientPlayer player, ModelPart arm, PoseStack matrixStack, int combinedLightIn, MultiBufferSource buffer, LivingEntityRenderer renderer, LivingEntity entity, int light)
 	{
 		matrixStack.pushPose();
 
@@ -121,9 +120,9 @@ public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractC
 
 		renderer.getModel().attackTime = 0.0f;
 
-		if(renderer instanceof HumanoidMobRenderer<?, ?>)
+		if(renderer instanceof HumanoidMobRenderer)
 		{
-			HumanoidMobRenderer<? super Mob, ?> casted = (HumanoidMobRenderer<? super Mob, ?>) renderer;
+			HumanoidMobRenderer<? super Mob, ?> casted = (HumanoidMobRenderer) renderer;
 			casted.getModel().swimAmount = 0.0f;
 			casted.getModel().crouching = false;
 

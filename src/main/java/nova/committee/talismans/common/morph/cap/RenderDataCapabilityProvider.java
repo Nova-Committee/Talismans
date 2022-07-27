@@ -30,12 +30,11 @@ public class RenderDataCapabilityProvider implements ICapabilityProvider
 
     public static final Capability<IRenderDataCapability> RENDER_CAP = CapabilityManager.get(new CapabilityToken<>(){});
 
-    private LazyOptional<IRenderDataCapability> instance = LazyOptional.of(RenderDataCapability::new);
+    private final LazyOptional<IRenderDataCapability> instance = LazyOptional.of(RenderDataCapability::new);
 
     @SubscribeEvent
     public static void onAttachCapsOnPlayer(AttachCapabilitiesEvent<Entity> event)
     {
-        // Only add this on client side
         if(event.getObject().level.isClientSide() && event.getObject() instanceof Player)
             event.addCapability(CAPABILITY_NAME, new RenderDataCapabilityProvider());
     }

@@ -30,7 +30,6 @@ public class MorphManagerHandler {
     }
 
     @Nullable
-    /** This method returns null if a morph item could not be created from a dead entity. **/
     public static MorphItem createMorphFromDeadEntity(Entity killedEntity)
     {
         for(int i = morphManagers.size() - 1; i >= 0; i--)

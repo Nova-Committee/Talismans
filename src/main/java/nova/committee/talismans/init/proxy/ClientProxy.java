@@ -1,12 +1,14 @@
 package nova.committee.talismans.init.proxy;
 
 import cn.evolvefield.mods.atomlib.init.proxy.IProxy;
+import cn.evolvefield.mods.atomlib.init.registry.RegistryUtil;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraftforge.client.ClientRegistry;
 import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.world.WorldEvent;
@@ -15,8 +17,10 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import nova.committee.talismans.client.camera.FreeCamera;
 import nova.committee.talismans.client.morph.UglyHackThatDoesntWork;
 import nova.committee.talismans.client.morph.handler.*;
+import nova.committee.talismans.client.particle.LaserParticle;
 import nova.committee.talismans.common.morph.player.AdvancedAbstractClientPlayerEntity;
 import nova.committee.talismans.init.handler.EntitySynchronizerHandler;
+import nova.committee.talismans.init.registry.ModParticleTypes;
 import org.lwjgl.glfw.GLFW;
 
 /**
@@ -50,6 +54,11 @@ public class ClientProxy implements IProxy {
         FreeCamera.instance.onWorldUnload();
     }
 
+    public void registerParticleFactories(ParticleFactoryRegisterEvent event) {
+        RegistryUtil.registerParticleFactory(ModParticleTypes.laser, LaserParticle.Factory::new);
+ }
+
+
     private void clientSetup(final FMLClientSetupEvent event) {
         ClientRegistry.registerKeyBinding(toggleFreeCamera);
         EntitySynchronizerHandler.addEntitySynchronizer(new CommonEntitySynchronizer());
@@ -59,6 +68,7 @@ public class ClientProxy implements IProxy {
         EntitySynchronizerHandler.addEntitySynchronizer(new TamableSynchronizer());
         EntitySynchronizerHandler.addEntitySynchronizer(new EndermanSynchronizer());
         EntitySynchronizerHandler.addEntitySynchronizer(new EnderDragonSynchronizer());
+
         UglyHackThatDoesntWork.thisisstupid = (gameProfile, world) ->
         {
             AdvancedAbstractClientPlayerEntity entity = new AdvancedAbstractClientPlayerEntity((ClientLevel) world, gameProfile);
@@ -91,6 +101,7 @@ public class ClientProxy implements IProxy {
     public void init() {
         var modbus = FMLJavaModLoadingContext.get().getModEventBus();
         modbus.addListener(this::clientSetup);
+        modbus.addListener(this::registerParticleFactories);
 
         var forgeBus = MinecraftForge.EVENT_BUS;
         forgeBus.addListener(this::onClientTick);

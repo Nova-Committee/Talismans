@@ -1,4 +1,20 @@
 {
+  "itemGroup.talismans": "Talismans",
   "category.talismans": "Talismans",
-  "key.talismans.freecam.toggle" : "Toggle Free Camera"
+  "key.talismans.freecam.toggle" : "Toggle Free Camera",
+  "item.talismans.icon" : "icon",
+
+  "item.talismans.rat_em" : "Rat Talismans",
+  "item.talismans.ox_em" : "Ox Talismans",
+  "item.talismans.tiger_em" : "Tiger Talismans",
+  "item.talismans.rabbit_em" : "Rabbit Talismans",
+  "item.talismans.dragon_em" : "Dragon Talismans",
+  "item.talismans.snake_em" : "Snake Talismans",
+  "item.talismans.horse_em" : "Horse Talismans",
+  "item.talismans.sheep_em" : "Sheep Talismans",
+  "item.talismans.monkey_em" : "Monkey Talismans",
+  "item.talismans.chicken_em" : "Chicken Talismans",
+  "item.talismans.dog_em" : "Dog Talismans",
+  "item.talismans.pig_em" : "Pig Talismans"
+
 }

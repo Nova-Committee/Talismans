@@ -92,23 +92,23 @@ public abstract class EntityMixin {
         }
     }
 
-    @Inject(at = @At("HEAD"), method = "playStepSound", cancellable = true)
-    public void playStepSound(BlockPos blockPos, BlockState block, CallbackInfo callbackInfo)
-    {
-        Entity thisInstance = (Entity) ((Object)this);
-
-        if(thisInstance.getLevel().isClientSide() && thisInstance instanceof Player player)
-        {
-            LazyOptional<IRenderDataCapability> renderDataOpt = player.getCapability(RenderDataCapabilityProvider.RENDER_CAP);
-
-            if(renderDataOpt.isPresent())
-            {
-                IRenderDataCapability cap = renderDataOpt.resolve().get();
-
-                Entity entity = cap.getOrCreateCachedEntity(player);
-                PLAY_STEP_SOUND.getValue(entity, blockPos, block);
-                callbackInfo.cancel();
-            }
-        }
-    }
+//    @Inject(at = @At("HEAD"), method = "playStepSound", cancellable = true)
+//    public void playStepSound(BlockPos blockPos, BlockState block, CallbackInfo callbackInfo)
+//    {
+//        Entity thisInstance = (Entity) ((Object)this);
+//
+//        if(thisInstance.getLevel().isClientSide() && thisInstance instanceof Player player)
+//        {
+//            LazyOptional<IRenderDataCapability> renderDataOpt = player.getCapability(RenderDataCapabilityProvider.RENDER_CAP);
+//
+//            if(renderDataOpt.isPresent())
+//            {
+//                IRenderDataCapability cap = renderDataOpt.resolve().get();
+//
+//                Entity entity = cap.getOrCreateCachedEntity(player);
+//                PLAY_STEP_SOUND.getValue(entity, blockPos, block);
+//                callbackInfo.cancel();
+//            }
+//        }
+//    }
 }

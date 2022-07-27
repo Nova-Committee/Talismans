@@ -9,6 +9,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import nova.committee.talismans.Static;
+import nova.committee.talismans.common.net.LaserHitBlockPacket;
 import nova.committee.talismans.common.net.MorphAddedSynchronizer;
 import nova.committee.talismans.common.net.MorphCapabilityFullSynchronizer;
 import nova.committee.talismans.common.net.MorphChangedSynchronizer;
@@ -40,6 +41,7 @@ public class NetworkHandler {
             registerSimpleImplPacket(Flight.FlightPacket.class, new Flight());
             registerSimpleImplPacket(ProxyEntityEvent.ProxyEntityEventPacket.class, new ProxyEntityEvent());
             registerSimpleImplPacket(SquidBoost.SquidBoostPacket.class, new SquidBoost());
+            registerSimpleImplPacket(LaserHitBlockPacket.class, new LaserHitBlockPacket());
         });
 
     }

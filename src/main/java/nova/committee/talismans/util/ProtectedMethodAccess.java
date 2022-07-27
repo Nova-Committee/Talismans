@@ -35,7 +35,10 @@ public class ProtectedMethodAccess<C, T>
     {
         try
         {
-            return (T)method.resolve().get().invoke(instance, args);
+            if (method.resolve().isPresent())
+                return (T) method.resolve().get().invoke(instance, args);
+            else
+                return (T) method.resolve().orElseThrow();
         }
         catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e)
         {

@@ -66,9 +66,6 @@ public class RenderDataCapability implements IRenderDataCapability
     {
         if(cachedEntity == null)
         {
-            // We put this statement below here instead of directly putting it into the
-            // direct block belonging to the method because we want to reduce the amount
-            // this capability is being accessed.
             IMorphCapability cap = MorphUtil.getCapOrNull(player);
 
             if(cap != null && cap.getCurrentMorph().isPresent())

@@ -1,0 +1,29 @@
+{
+  "laser_start": {
+    "category": "item",
+    "sounds": [
+      {
+        "name": "talismans:laser_start",
+        "stream": false
+      }
+    ]
+  },
+  "laser": {
+    "category": "item",
+    "sounds": [
+      {
+        "name": "talismans:laser",
+        "stream": false
+      }
+    ]
+  },
+  "laser_stop": {
+    "category": "item",
+    "sounds": [
+      {
+        "name": "talismans:laser_stop",
+        "stream": false
+      }
+    ]
+  }
+}

@@ -29,6 +29,8 @@ public class ModItems {
     public static Item dog_em;
     public static Item pig_em;
 
+    public static Item icon;
+
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
         final IForgeRegistry<Item> registry = event.getRegistry();
@@ -45,7 +47,8 @@ public class ModItems {
                 monkey_em = new MonkeyEmblems(),
                 chicken_em = new ChickenEmblems(),
                 dog_em= new DogEmblems(),
-                pig_em = new PigEmblems()
+                pig_em = new PigEmblems(),
+                icon = new Item(new Item.Properties().tab(Static.TAB).stacksTo(1)).setRegistryName("icon")
 
         );
     }

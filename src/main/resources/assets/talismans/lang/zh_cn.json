@@ -1,4 +1,21 @@
 {
+  "itemGroup.talismans": "成龙历险记：符咒",
   "category.talismans": "成龙历险记：符咒",
-  "key.talismans.freecam.toggle" : "切换到灵魂出窍模式"
+  "key.talismans.freecam.toggle" : "切换到灵魂出窍模式",
+  "item.talismans.icon" : "图标",
+
+  "item.talismans.rat_em" : "鼠-符咒",
+  "item.talismans.ox_em" : "牛-符咒",
+  "item.talismans.tiger_em" : "虎-符咒",
+  "item.talismans.rabbit_em" : "兔-符咒",
+  "item.talismans.dragon_em" : "龙-符咒",
+  "item.talismans.snake_em" : "蛇-符咒",
+  "item.talismans.horse_em" : "马-符咒",
+  "item.talismans.sheep_em" : "羊-符咒",
+  "item.talismans.monkey_em" : "猴-符咒",
+  "item.talismans.chicken_em" : "鸡-符咒",
+  "item.talismans.dog_em" : "狗-符咒",
+  "item.talismans.pig_em" : "猪-符咒"
+
+
 }

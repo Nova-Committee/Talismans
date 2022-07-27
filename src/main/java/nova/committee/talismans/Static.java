@@ -7,6 +7,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.GameRules;
 import nova.committee.talismans.common.morph.VisualMorphDataRegistry;
+import nova.committee.talismans.init.registry.ModItems;
 import org.slf4j.Logger;
 
 /**
@@ -21,7 +22,7 @@ public class Static {
 
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public static BaseTab TAB = new BaseTab(MOD_ID, Items.DIRT);
+    public static BaseTab TAB = new BaseTab(MOD_ID, ModItems.icon);
 
     public static Rarity RARITY = Rarity.create("POWER", ChatFormatting.DARK_AQUA);
 

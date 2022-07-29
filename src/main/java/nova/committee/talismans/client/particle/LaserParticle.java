@@ -52,14 +52,14 @@ public class LaserParticle extends TextureSheetParticle {
     private final Direction direction;
     private final float halfLength;
 
-    private LaserParticle(ClientLevel world, Vec3 start, Vec3 end, Direction dir, float energyScale) {
+    private LaserParticle(ClientLevel world, Vec3 start, Vec3 end, Direction dir) {
         super(world, (start.x + end.x) / 2D, (start.y + end.y) / 2D, (start.z + end.z) / 2D);
         lifetime = 5;
         rCol = 1;
         gCol = 0;
         bCol = 0;
         alpha = 0.11F;
-        quadSize = energyScale;
+        quadSize = 2F;
         halfLength = (float) (end.distanceTo(start) / 2);
         direction = dir;
         updateBoundingBox();
@@ -149,7 +149,7 @@ public class LaserParticle extends TextureSheetParticle {
         public LaserParticle createParticle(LaserParticleData data, @Nonnull ClientLevel world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
             Vec3 start = new Vec3(x, y, z);
             Vec3 end = translate(data.direction(), data.distance());
-            LaserParticle particleLaser = new LaserParticle(world, start, end, data.direction(), data.energyScale());
+            LaserParticle particleLaser = new LaserParticle(world, start, end, data.direction());
             particleLaser.pickSprite(this.spriteSet);
             return particleLaser;
         }

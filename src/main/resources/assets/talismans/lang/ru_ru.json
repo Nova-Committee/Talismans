@@ -1,0 +1,20 @@
+{
+  "itemGroup.talismans": "Talismans",
+  "category.talismans": "Talismans",
+  "key.talismans.freecam.toggle" : "Переключить Free Camera",
+  "item.talismans.icon" : "иконка",
+
+  "item.talismans.rat_em" : "Крысиные талисманы",
+  "item.talismans.ox_em" : "Бычьи талисманы",
+  "item.talismans.tiger_em" : "Тигровые талисманы",
+  "item.talismans.rabbit_em" : "Кроличьи талисманы",
+  "item.talismans.dragon_em" : "Драконьи талисманы",
+  "item.talismans.snake_em" : "Змеиные талисманы",
+  "item.talismans.horse_em" : "Лошадиные талисманы",
+  "item.talismans.sheep_em" : "Овечьи талисманы",
+  "item.talismans.monkey_em" : "Обезьяньи талисманы",
+  "item.talismans.chicken_em" : "Куриные талисманы",
+  "item.talismans.dog_em" : "Собачьи талисманы",
+  "item.talismans.pig_em" : "Свиные талисманы"
+
+}
